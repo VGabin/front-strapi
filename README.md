@@ -1,40 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
 
-## Getting Started
+# Projet Front et Back Strapi
 
-First, run the development server:
+Ce projet comprend un front-end et un back-end utilisant Strapi. Le front-end est construit avec Next.js, tandis que le back-end utilise Strapi pour gérer les données. Ce guide explique comment configurer et lancer les deux parties du projet.
+
+## Prérequis
+
+Avant de commencer, assurez-vous d'avoir installé les outils suivants sur votre machine :
+
+- [Node.js](https://nodejs.org/) (version recommandée : LTS)
+- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
+- [Docker](https://www.docker.com/) (optionnel pour exécuter Strapi dans un conteneur)
+
+### Étape 1 : Cloner les dépôts
+
+Clonez les deux dépôts pour récupérer le code source :
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clonez le dépôt front-end
+git clone https://github.com/VGabin/front-strapi.git
+cd front-strapi
+
+# Clonez le dépôt back-end
+git clone https://github.com/VGabin/back-strapi.git
+cd back-strapi
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Étape 2 : Configurer le back-end (Strapi)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+1. **Installez les dépendances du back-end :**
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+   Allez dans le dossier `back-strapi` et installez les dépendances avec npm ou yarn :
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+   ```bash
+   cd back-strapi
+   npm install
+   # ou
+   yarn install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Créer le fichier `.env.local` :**
 
-## Learn More
+   Dans le dossier `back-strapi`, créez un fichier `.env.local` à la racine du projet. Ajoutez-y la ligne suivante pour définir l'URL de l'API Strapi :
 
-To learn more about Next.js, take a look at the following resources:
+   ```env
+   NEXT_PUBLIC_STRAPI_URL=http://localhost:1337
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+3. **Lancer Strapi :**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   Maintenant, vous pouvez lancer votre back-end Strapi en utilisant la commande suivante :
 
-## Deploy on Vercel
+   ```bash
+   npm run develop
+   # ou
+   yarn develop
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   Cela démarrera le serveur Strapi sur `http://localhost:1337`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+### Étape 3 : Configurer le front-end (Next.js)
+
+1. **Installez les dépendances du front-end :**
+
+   Allez dans le dossier `front-strapi` et installez les dépendances avec npm ou yarn :
+
+   ```bash
+   cd front-strapi
+   npm install
+   # ou
+   yarn install
+   ```
+
+2. **Lancer Next.js :**
+
+   Une fois les dépendances installées, lancez l'application front-end :
+
+   ```bash
+   npm run dev
+   # ou
+   yarn dev
+   ```
+
+   Cela démarrera le serveur front-end Next.js sur `http://localhost:3000`.
+
+### Étape 4 : Vérification
+
+1. Ouvrez votre navigateur et allez sur `http://localhost:3000` pour voir l'interface front-end.
+2. Vous devriez être capable de communiquer avec votre back-end Strapi à `http://localhost:1337`.
+
+### Étape 5 : Développement et tests
+
+- Vous pouvez maintenant commencer à développer et tester les deux parties du projet. Le front-end consommera les données via l'API de Strapi.
+- Vous pouvez ajouter, modifier et supprimer des données directement dans le back-end via l'interface d'administration de Strapi accessible à `http://localhost:1337/admin`.
+
+## Problèmes connus
+
+- Si vous avez des problèmes de connexion entre le front-end et le back-end, assurez-vous que les deux applications sont bien en cours d'exécution sur les bons ports (`localhost:3000` pour le front-end et `localhost:1337` pour le back-end).
+- Vérifiez que le fichier `.env.local` est correctement configuré avec l'URL de Strapi.
+
+## Licences
+
+- Le projet utilise une licence MIT. Consultez les fichiers LICENSE des deux dépôts pour plus de détails.
